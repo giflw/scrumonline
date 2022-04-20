@@ -3,22 +3,31 @@
 require_once "bootstrap.php";
 require_once "controllers/response.php";
 
+$pathInfo = $_SERVER['PATH_INFO'];
+$pathInfo = explode('/', $pathInfo);
+array_shift($pathInfo);
+
 // Parse controller and method
-$controllerName = $_GET["c"];
-$method = $_GET['m'];
+$controllerName = isset($_GET["c"]) ? $_GET["c"] : $pathInfo[0];
+$method = isset($_GET['m']) ? $_GET['m'] : $pathInfo[1];
 
 // Load controller and invoke method
 $controller = include "controllers/" . $controllerName . "-controller.php";
-// Pass both query arguments
-if (isset($_GET["id"]) && isset($_GET["mid"]))
-  $result = $controller->$method($_GET["id"], $_GET["mid"]);
-// Pass only id
-else if (isset($_GET["id"]))
-  $result = $controller->$method($_GET["id"]);
-// Pass no arguments
-else
-  $result = $controller->$method();
 
+$id = isset($_GET["id"]) ? $_GET["id"] : (count($pathInfo) > 2 ? $pathInfo[2] : null);
+$mid = isset($_GET["mid"]) ? $_GET["mid"] : (count($pathInfo) > 3 ? $pathInfo[3] : null);
+
+if ($id !== null && $mid !== null) {
+  // Pass both query arguments
+  $result = $controller->$method($id, $mid);
+} else if ($id !== null) {
+  // Pass only id
+  $result = $controller->$method($id);
+} else {
+  // Pass no arguments
+  $result = $controller->$method();
+}
 // Return reponse as JSON if this method has a return value
-if (isset($result) && $result != null)
+if (isset($result) && $result != null) {
   echo json_encode($result);
+}

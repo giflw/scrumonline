@@ -17,7 +17,7 @@ foreach($templates as $index=>$template)
 <html class="no-js" lang="en-EN">
 <head>
   <meta charset="utf-8">
-  <base href="/">
+  <base href="<?= $basePath ?>">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Online planning poker</title>
   <meta name="description" content="Scrumpoker online is an open source web implementation of planning poker for scrum teams to determine the complexity of stories. It aims to integrate ticketing systems like JIRA, Github or Gitlab.">  
@@ -25,14 +25,14 @@ foreach($templates as $index=>$template)
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
-  <script src="/js/modernizr-2.8.3.min.js"></script>
+  <script src="<?= $basePath ?>js/modernizr-2.8.3.min.js"></script>
   
   <!-- Style sheets -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= $basePath ?>css/bootstrap.min.css">
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/scrumonline.css">
+  <link rel="stylesheet" href="<?= $basePath ?>css/main.css">
+  <link rel="stylesheet" href="<?= $basePath ?>css/normalize.css">
+  <link rel="stylesheet" href="<?= $basePath ?>css/scrumonline.css">
 
   <!-- Pretty cookie consent and styling -->
   <?php include("templates/cookie_notice.php") ?>
@@ -60,7 +60,7 @@ foreach($templates as $index=>$template)
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-    	<a class="navbar-brand" href="/">Scrum Poker</a>
+    	<a class="navbar-brand" href="<?= $basePath ?>">Scrum Poker</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -75,14 +75,14 @@ foreach($templates as $index=>$template)
 <!-- Add your site or application content here -->
 <div class="container-fluid main" ng-view></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.min.js"></script>
-<script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
-<script src="/js//bootstrap.min.js"></script>
-<script src="/js/J2M.js"></script>
+<script src="<?= $basePath ?>js/jquery.min.js"></script>
+<script src="<?= $basePath ?>js/angular.min.js"></script>
+<script src="<?= $basePath ?>js/angular-route.min.js"></script>
+<script src="<?= $basePath ?>js/angular-cookies.min.js"></script>
+<script src="<?= $basePath ?>js/angular-sanitize.min.js"></script>
+<script src="<?= $basePath ?>js/showdown.min.js"></script>
+<script src="<?= $basePath ?>js/bootstrap.min.js"></script>
+<script src="<?= $basePath ?>js/J2M.js"></script>
 <script type="text/javascript">
   var cardSets = [
 <?php foreach($cardSets as $key=>$cardSet) { ?>
@@ -90,9 +90,9 @@ foreach($templates as $index=>$template)
 <?php } ?>
   ];
 </script>
-<script src="/js/main.js"></script>
+<script src="<?= $basePath ?>js/main.js"></script>
 <?php foreach($plugins as $plugin) {?>
-<script src="/js/<?= strtolower($plugin) ?>-plugin.js"></script>
+<script src="<?= $basePath ?>js/<?= strtolower($plugin) ?>-plugin.js"></script>
 <?php } ?>
   
 <!-- Templates of the page -->

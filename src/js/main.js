@@ -60,9 +60,24 @@ scrum.app = angular.module('scrum-online', ['ngRoute', 'ngSanitize', 'ngCookies'
 // Configure routing
 // -----------------------------
 scrum.app.config(
-  function($locationProvider, $routeProvider) {
+  function($locationProvider, $routeProvider, $httpProvider) {
     // Use HTML5 mode for prettier routes
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
+
+    var BASE_URL = window.location.pathname;
+
+    $httpProvider.interceptors.push(function($q) {
+      return {
+        'request': function(config) {
+          if (config.url.indexOf('/api') === 0) {
+            config.url = (BASE_URL + config.url)
+              .replace('/api/', '/api.php/')
+              .replace('//', '/');
+          }
+          return config;
+        }
+      };
+    });
 
     // Configure routing
     $routeProvider
